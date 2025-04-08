@@ -4,6 +4,7 @@ import BannerImage from "../../assets/image/banner.png";
 import musicRobot from "../../assets/image/musicRobot.svg";
 import PostSection from "./PostSection";
 import ChatBubble from "./component/ChatBubble";
+import ChatIcon from "../../assets/image/faq.svg";
 
 const Home = () => {
   const dummyPosts = Array.from({ length: 6 }, (_, i) => i);
@@ -20,16 +21,22 @@ const Home = () => {
       </S.LeftContainer>
 
       <S.RightContainer>
-        <S.AiContainer>
+        <S.AdContainer>
+          <S.SectionTitleText>최신 AI로 누구보다 <span style={{color:"#FF3333"}}>쉽고 빠르게</span> 면접 준비를 끝내보세요!</S.SectionTitleText>
           <S.RowSection>
             <S.RobotImage src={musicRobot} alt="musicRobot" />
             <S.ColumnSection>
               <ChatBubble type="red">안녕하세요!</ChatBubble>
               <ChatBubble> 여러분들을 도와드릴 AI 입니다 </ChatBubble>
-              {/* 안녕하세요는 텍스트 길이에 맞게 뷰가 짜여지는데, 위에 여러분 저 챗은 길이에 안맞음 수정 pls */}
             </S.ColumnSection>
           </S.RowSection>
-        </S.AiContainer>
+        </S.AdContainer>
+
+        <S.AdContainer>
+          <S.SectionTitleText>여러가지 면접 꿀팁들을 알아보세요!</S.SectionTitleText>
+          <S.RobotImage src={ChatIcon} alt="chatIcon" />
+        </S.AdContainer>
+
       </S.RightContainer>
     </S.HomeContainer>
   );
