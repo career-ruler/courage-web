@@ -1,8 +1,9 @@
 import React from "react";
+import * as S from "./style";
 
 const Auth = () => {
     return (
-      <h2>hello</h2>
+      <S.TitleText>회원가입</S.TitleText>
     );
   };
   

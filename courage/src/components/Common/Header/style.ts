@@ -2,20 +2,19 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const HeaderBarContainer = styled.div`
-    width: 100%;
-    min-width: 260px;
-    height: 116px;
-    
-    display: flex;
-    align-items: center;
-    background: #FFF;
-    padding: 0 20px;
-    justify-content: space-between;
+  width: 100%;
+  min-width: 260px;
+  min-height: 65px; // 최소 높이만 지정
+  display: flex;
+  align-items: center;
+  background: #FFF;
+  padding: 0 20px;
+  justify-content: space-between;
 `;
 
 export const Logo = styled.img`
     width: auto;
-    height: 57px;
+    height: 30px;
     margin-left: 100px;
 `;
 
@@ -28,7 +27,7 @@ export const NavMenu = styled.nav`
 export const MenuItem = styled(Link)`
     text-decoration: none;
     color: black;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 500;
     margin-right: 52px;
     
@@ -53,11 +52,11 @@ export const ProfileImage = styled.img`
 `;
 
 export const LoginButton = styled.button`
-    width: 98px;
-    height: 55px;
+    width: 68px;
+    height: 40px;
     background-color: white;
     color: #626161;
-    font-size: 19px;
+    font-size: 15px;
     font-weight: 600;
     border-radius: 15px;
     border: 1px solid #C4C1C1;
