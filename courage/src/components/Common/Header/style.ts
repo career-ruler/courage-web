@@ -45,8 +45,8 @@ export const ProfileWrapper = styled.div`
 `;
 
 export const ProfileImage = styled.img`
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     object-fit: cover;
 `;
@@ -64,3 +64,4 @@ export const LoginButton = styled.button`
     justify-content: center;
     align-items: center;
 `;
+

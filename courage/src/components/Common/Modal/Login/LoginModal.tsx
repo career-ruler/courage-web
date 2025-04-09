@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./style";
-import LogoImage from "../../../assets/image/courageLogo.svg";
+// import LogoImage from "../../../assets/image/courageLogo.svg";
+import LogoImage from "assets/image/courageLogo.svg";
 
 interface ModalProps {
   onClose: () => void;

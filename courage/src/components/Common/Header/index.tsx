@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import * as S from "./style";
 import LogoImage from "../../../assets/image/courageLogo.svg";
 import ProfileImage from "../../../assets/image/profile.svg";
-import LoginModal from "../Modal/LoginModal";
+import LoginModal from "../Modal/Login/LoginModal";
+import ProfileModal from "../Modal/Profile/ProfileModal";
 
 const HeaderBar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const toggleProfileModal = () => setIsProfileModalOpen((prev) => !prev);
 
   return (
     <>
@@ -23,14 +27,20 @@ const HeaderBar = () => {
 
         <S.ProfileWrapper>
           {isLoggedIn ? (
-            <S.ProfileImage src={ProfileImage} alt="Profile" />
+            <>
+              <S.ProfileImage
+                src={ProfileImage}
+                alt="Profile"
+                onClick={toggleProfileModal}
+              />
+              {isProfileModalOpen && <ProfileModal />}
+            </>
           ) : (
             <S.LoginButton onClick={openModal}>로그인</S.LoginButton>
           )}
         </S.ProfileWrapper>
       </S.HeaderBarContainer>
 
-      {/* 로그인 모달 */}
       {isModalOpen && <LoginModal onClose={closeModal} />}
     </>
   );
