@@ -38,6 +38,7 @@ export const RightContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   margin-top: 30px;
+  padding-left: 28px;
   gap: 20px;
 
   @media (max-width: 768px) {
@@ -47,7 +48,7 @@ export const RightContainer = styled.div`
 `;
 
 export const AdContainer = styled.div`
-  width: 400px;
+  width: 350px;
   height: 229px;
   flex-direction: column;
   display: flex;
