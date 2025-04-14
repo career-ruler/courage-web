@@ -26,6 +26,7 @@ export const discriptionText = styled.p`
   margin-bottom: 30px;
   text-align: center;
 `;
+
 export const InputFieldContainer = styled.div`
   width: 60%;
   display: flex;
@@ -64,7 +65,7 @@ export const SignupButton = styled.button`
   width: 60%;
   height: 40px;
   margin-top: 45px;
-  margin-bottom: 100px;
+  margin-bottom: 100px; /* 원래 코드 복구 */
   background-color: #313030;
   color: #ffffff;
   font-size: 14px;
@@ -72,4 +73,17 @@ export const SignupButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+`;
+
+export const ProfileContainer = styled.div`
+  width: 55%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  padding: 20px;
+  margin: 0 auto;
+  border-bottom: 1px solid #ccc; /* 1px 가로 선 추가 */
 `;

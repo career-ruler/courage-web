@@ -48,6 +48,16 @@ export const LogoutButton = styled.button`
   padding: 0;
 `;
 
+export const ProfileButton = styled.button`
+  background: none;
+  border: none;
+  color: #000000;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+`;
+
 export const ProfileInfoContainer = styled.div`
     display: flex;
     flex-direction: column;
