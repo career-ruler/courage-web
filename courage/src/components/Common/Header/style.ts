@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 export const HeaderBarContainer = styled.div`
   width: 100%;
   min-width: 260px;
-  min-height: 65px; // 최소 높이만 지정
+  min-height: 65px;
   display: flex;
   align-items: center;
   background: #FFF;
   padding: 0 20px;
   justify-content: space-between;
+  border-bottom: 1px solid #E0E0E0;
 `;
 
 export const Logo = styled.img`

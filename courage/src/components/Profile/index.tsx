@@ -2,7 +2,6 @@ import React from "react";
 import * as S from "./style";
 import ProfileIcon from "../../assets/image/profile.svg";
 import PostFrom from "./component/PostForm";
-import PostFormImg from "../../assets/image/banner.png";
 import PostTestImg from "../../assets/image/banner.png";
 
 const Profile = () => {
