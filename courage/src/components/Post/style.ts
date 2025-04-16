@@ -52,3 +52,11 @@ export const PostCategoryTitle = styled.p<{ selected?: boolean }>`
   cursor: pointer;
   transition: color 0.3s, border-bottom 0.3s;
 `;
+
+export const ColumnContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* 가로에 최대 1개의 요소 */
+  gap: 20px; /* 요소 간 간격 */
+  width: 100%;
+  margin-top: 20px;
+`;

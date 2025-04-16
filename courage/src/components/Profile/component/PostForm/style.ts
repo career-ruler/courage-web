@@ -21,6 +21,7 @@ export const PostImg = styled.img`
 export const PostHeader = styled.div`
   width: 100%;
   height: 100%;
+  min-height: 95px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -47,7 +48,7 @@ export const PostFooter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  margin-top: auto;
 `;
 
 export const PostDate = styled.p`

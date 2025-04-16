@@ -1,18 +1,24 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as S from "./style";
-// import PostFrom from "@components/Profile/component/PostForm";
 import PostFrom from "../Profile/component/PostForm";
 import PostTestImg from "../../assets/image/banner.png";
 
 const Post = () => {
   const [selectedButton, setSelectedButton] = useState<number>(0);
+  const navigate = useNavigate();
 
   const handleButtonClick = (index: number) => {
     setSelectedButton(index);
   };
 
+  const handlePostClick = (id: number) => {
+    navigate(`/post/${id}`);
+  };
+
   const posts = Array.from({ length: 10 }, (_, index) => ({
-    title: `Sample Title ${index + 1}`,
+    id: index + 1,
+    title: `Sample Title I really want to go home So, Do you want go with me ..? You will like it.  ${index + 1}`,
     username: `User ${index + 1}`,
     image: PostTestImg,
     date: `2023-01-${String(index + 1).padStart(2, "0")}`,
@@ -33,15 +39,18 @@ const Post = () => {
           )
         )}
       </S.PostCategoryContainer>
-      {posts.map((post, index) => (
-        <PostFrom
-          key={index}
-          title={post.title}
-          username={post.username}
-          image={post.image}
-          date={post.date}
-        />
-      ))}
+      <S.ColumnContainer>
+        {posts.map((post) => (
+          <div key={post.id} onClick={() => handlePostClick(post.id)}>
+            <PostFrom
+              title={post.title}
+              username={post.username}
+              image={post.image}
+              date={post.date}
+            />
+          </div>
+        ))}
+      </S.ColumnContainer>
     </S.PostContainer>
   );
 };
