@@ -8,6 +8,7 @@ export const PostFormContainer = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   gap: 20px;
+  box-sizing: border-box;
 `;
 
 export const PostImg = styled.img`

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PostContainer = styled.div`
   width: 55%;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -11,6 +11,15 @@ export const PostContainer = styled.div`
   padding: 40px;
   margin: 0 auto;
   gap: 35px;
+  box-sizing: border-box;
+  overflow: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const HorizontalLine = styled.div`

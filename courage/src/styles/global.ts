@@ -23,6 +23,11 @@ const GlobalStyle = createGlobalStyle`
         border: 0;
         background-color: transparent;
     }
+    html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 export default GlobalStyle;
