@@ -15,7 +15,7 @@ export const PostContainer = styled.div`
   overflow: hidden;
   overflow-y: auto;
   scrollbar-width: none;
-  -ms-overflow-style: none; 
+  -ms-overflow-style: none;
 
   &::-webkit-scrollbar {
     display: none;
@@ -37,7 +37,7 @@ export const PostCategoryContainer = styled.div`
   gap: 20px;
   width: 100%;
   position: relative;
-  border-bottom: 1px solid #F5F2F2;
+  border-bottom: 1px solid #f5f2f2;
   padding-bottom: -5px;
 `;
 
@@ -55,8 +55,8 @@ export const PostCategoryTitle = styled.p<{ selected?: boolean }>`
 
 export const ColumnContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(1, 1fr); /* 가로에 최대 1개의 요소 */
-  gap: 20px; /* 요소 간 간격 */
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
   width: 100%;
   margin-top: 20px;
 `;
