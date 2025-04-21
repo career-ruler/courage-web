@@ -6,6 +6,7 @@ interface PostFormProps {
   username: string;
   image: string;
   date: string;
+  onClick?: () => void; // 클릭 이벤트 추가
 }
 
 const PostFrom: React.FC<PostFormProps> = ({
@@ -13,9 +14,10 @@ const PostFrom: React.FC<PostFormProps> = ({
   username,
   image,
   date,
+  onClick,
 }) => {
   return (
-    <S.PostFormContainer>
+    <S.PostFormContainer onClick={onClick}>
       <S.PostImg src={image} alt="Post" />
       <S.PostHeader>
         <S.PostTitle>{title}</S.PostTitle>

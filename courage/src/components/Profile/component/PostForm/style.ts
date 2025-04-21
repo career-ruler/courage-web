@@ -8,7 +8,6 @@ export const PostFormContainer = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   gap: 20px;
-  box-sizing: border-box;
 `;
 
 export const PostImg = styled.img`
@@ -20,7 +19,6 @@ export const PostImg = styled.img`
 
 export const PostHeader = styled.div`
   width: 100%;
-  height: 100%;
   min-height: 95px;
   display: flex;
   flex-direction: column;
@@ -38,23 +36,20 @@ export const PostTitle = styled.h1`
 export const PostUser = styled.p`
   font-size: 12px;
   color: #555;
-  margin-top: auto;
   text-align: right;
 `;
 
 export const PostFooter = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto;
+  gap: 10px;
 `;
 
 export const PostDate = styled.p`
   font-size: 12px;
   color: #888;
   margin: 0;
-  margin-top: auto;
   text-align: left;
 `;

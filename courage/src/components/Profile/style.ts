@@ -30,14 +30,13 @@ export const ColumContainer = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   padding: 30px;
-  /* margin-left: 10px; */
 `;
 
 export const ProfileImage = styled.img`
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
 `;
 
 export const ProfileMediumTitle = styled.p`
@@ -57,7 +56,7 @@ export const ProfileSmallTitle = styled.p`
 export const HorizontalLine = styled.div`
   width: 100%;
   height: 1px;
-  background-color: #F5F2F2;
+  background-color: #f5f2f2;
   margin: 15px 15px;
 `;
 
