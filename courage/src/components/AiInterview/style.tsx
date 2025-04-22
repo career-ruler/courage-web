@@ -1,4 +1,16 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const blinkAnimation = keyframes`
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 export const AiInterviewContainer = styled.div`
   width: 65%;
@@ -22,11 +34,10 @@ export const AiInterviewContainer = styled.div`
 
 export const InputContainer = styled.div`
   position: fixed;
-  position: absolute;
-  bottom: 80px;
-  left: 50%; 
+  bottom: 40px;
+  left: 50%;
   transform: translateX(-50%);
-  width: 90%; 
+  width: 90%;
   max-width: 800px;
   display: flex;
   flex-direction: row;
@@ -78,5 +89,12 @@ export const AiInterviewTitle = styled.p`
   font-size: 20px;
   font-weight: bold;
   color: #000000;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+`;
+
+export const AiInterviewLoading = styled.p`
+  font-size: 13px;
+  font-weight: 500;
+  color: #C4C1C1;
+  animation: ${blinkAnimation} 1.5s infinite;
 `;
