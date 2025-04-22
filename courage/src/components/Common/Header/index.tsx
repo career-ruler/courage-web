@@ -22,7 +22,7 @@ const HeaderBar = () => {
         <S.NavMenu>
           <S.MenuItem to="/">홈</S.MenuItem>
           <S.MenuItem to="/post">포스트</S.MenuItem>
-          <S.MenuItem to="/ai-interview">AI 면접</S.MenuItem>
+          <S.MenuItem to="/aiInterview">AI 면접</S.MenuItem>
         </S.NavMenu>
 
         <S.ProfileWrapper>

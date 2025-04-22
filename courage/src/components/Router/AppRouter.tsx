@@ -5,6 +5,7 @@ import HomePage from "pages/Home/page";
 import ProfilePage from "pages/Profile/page";
 import PostPage from "pages/Post/page";
 import DetailPostPage from "pages/DetailPost/page";
+import AiInterviewPage from "pages/AiInterview/page";
 
 const AppRouter = () => {
   return (
@@ -14,6 +15,7 @@ const AppRouter = () => {
       <Route path="/profile"  element={<ProfilePage/>} />
       <Route path="/post" element={<PostPage/>} />
       <Route path="/post/:id" element={<DetailPostPage/>} />
+      <Route path="/aiInterview" element={<AiInterviewPage/>} />
     </Routes>
   );
 };

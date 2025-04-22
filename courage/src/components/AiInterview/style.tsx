@@ -1,0 +1,82 @@
+import styled from "styled-components";
+
+export const AiInterviewContainer = styled.div`
+  width: 65%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 0 auto;
+  padding: 30px 100px;
+  box-sizing: border-box;
+  overflow: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const InputContainer = styled.div`
+  position: fixed;
+  position: absolute;
+  bottom: 80px;
+  left: 50%; 
+  transform: translateX(-50%);
+  width: 90%; 
+  max-width: 800px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+`;
+
+export const InputField = styled.input`
+  width: 100%;
+  height: 40px;
+  padding: 10px 40px 10px 10px;
+  font-size: 16px;
+  color: #000000;
+  border: 1px solid #f6f5f8;
+  border-radius: 5px;
+  outline: none;
+  background-color: #f6f5f8;
+
+  ::placeholder {
+    color: #aaaaaa;
+    font-size: 14px;
+  }
+`;
+
+export const InputIconButton = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+`;
+
+
+export const AiInterviewTitle = styled.p`
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 20px;
+`;

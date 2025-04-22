@@ -91,6 +91,7 @@ export const InputContainer = styled.div`
   width: 100%;
   margin-top: 20px;
   align-items: center;
+  margin-bottom: 20px;
 `;
 
 export const InputField = styled.input`
@@ -99,11 +100,10 @@ export const InputField = styled.input`
   padding: 10px 40px 10px 10px;
   font-size: 16px;
   color: #000000;
-  border: 1px solid #fff;
+  border: 1px solid #f6f5f8;
   border-radius: 5px;
   outline: none;
   background-color: #f6f5f8;
-  margin-bottom: 8px;
 
   ::placeholder {
     color: #aaaaaa;
@@ -199,10 +199,10 @@ export const ReplyInputContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 5px; /* 아래 마진 줄임 */
+  gap: 5px;
   margin-top: 10px;
-  position: relative; /* 아이콘 배치를 위해 relative 추가 */
-  margin-bottom: 10px; /* 아래 마진 추가 */
+  position: relative;
+  margin-bottom: 10px;
 `;
 
 export const ReplyInputField = styled.input`
