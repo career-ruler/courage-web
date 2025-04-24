@@ -84,7 +84,6 @@ export const InputIconButton = styled.button`
   }
 `;
 
-
 export const AiInterviewTitle = styled.p`
   font-size: 20px;
   font-weight: bold;
@@ -98,3 +97,22 @@ export const AiInterviewLoading = styled.p`
   color: #C4C1C1;
   animation: ${blinkAnimation} 1.5s infinite;
 `;
+
+export const ChatContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  margin-bottom: 100px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+`;
+

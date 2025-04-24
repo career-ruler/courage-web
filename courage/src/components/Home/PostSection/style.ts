@@ -42,10 +42,11 @@ export const PostSectionWriter = styled.p`
 `;
 
 export const PostFooter = styled.div`
-    margin-top: auto; //최하단으로 미룸
+    margin-top: auto;
     width: 100%;
     display: flex;
     justify-content: flex-end;
 `;
+
 
 export const PostFooterText = styled(PostSectionWriter)``; 
