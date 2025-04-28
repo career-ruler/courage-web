@@ -103,6 +103,7 @@ export const ChatContainer = styled.div`
   flex-direction: column;
   gap: 10px;
   height: 100%;
+  width: 100%;
   overflow-y: auto;
   padding: 10px;
   background-color: #f9f9f9;

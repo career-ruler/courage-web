@@ -4,20 +4,20 @@ import SendIcon from "../../assets/image/Send.svg";
 import ChatBubble from "../Home/component/ChatBubble";
 
 const AiInterview = () => {
-  const [messages, setMessages] = useState<{ text: string; direction: "left" | "right"; isBot?: boolean }[]>([]);
+  const [messages, setMessages] = useState<
+    { text: string; direction: "left" | "right"; isBot?: boolean }[]
+  >([]);
   const [inputValue, setInputValue] = useState("");
-  const [isSending, setIsSending] = useState(false); // 중복 방지 상태 추가
-  const chatContainerRef = useRef<HTMLDivElement>(null); // 채팅 컨테이너 참조
+  const [isSending, setIsSending] = useState(false);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const handleSendMessage = () => {
     if (!inputValue.trim() || isSending) return;
     setIsSending(true);
 
-    // 사용자가 입력한 메시지를 추가
     setMessages((prev) => [...prev, { text: inputValue, direction: "right" }]);
     setInputValue("");
 
-    // AI 봇의 응답을 추가 (더미 데이터)
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
@@ -36,7 +36,8 @@ const AiInterview = () => {
 
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -46,7 +47,12 @@ const AiInterview = () => {
         {messages.map((message, index) => (
           <div key={index}>
             {message.isBot && <S.AiInterviewTitle>AI bot</S.AiInterviewTitle>}
-            <ChatBubble direction={message.direction}>{message.text}</ChatBubble>
+            <ChatBubble
+              direction={message.direction}
+              type={message.isBot ? "red" : "default"}
+            >
+              {message.text}
+            </ChatBubble>
           </div>
         ))}
       </S.ChatContainer>
