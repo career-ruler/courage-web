@@ -15,6 +15,10 @@ const ProfileModal = () => {
     navigate("/profile");
   };
 
+  const handleAddPostClick = () => {
+    navigate("/createPost");
+  };
+
   return (
     <S.ProfileModalContainer>
       <S.ProfileModalContent>
@@ -25,7 +29,7 @@ const ProfileModal = () => {
             <S.BoldText>leeyoonchae</S.BoldText>
           </S.ProfileInfoContainer>
         </S.ProfileContainer>
-        <S.AddPostButton>
+        <S.AddPostButton onClick={handleAddPostClick}>
           <S.ButtonIcon src={PlusIcon} alt="Add Post Icon" />
           포스트 추가하기
         </S.AddPostButton>
