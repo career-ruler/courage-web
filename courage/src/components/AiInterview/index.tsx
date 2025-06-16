@@ -3,28 +3,73 @@ import * as S from "./style";
 import SendIcon from "../../assets/image/Send.svg";
 import ChatBubble from "../Home/component/ChatBubble";
 
+import { generateQuestion, generateAnswer } from "../../api/aiInterview/aiInterview";
+
+type Message = {
+  text: string;
+  direction: "left" | "right";
+  isBot?: boolean;
+};
+
+type Phase = "question" | "answer";
+
 const AiInterview = () => {
-  const [messages, setMessages] = useState<
-    { text: string; direction: "left" | "right"; isBot?: boolean }[]
-  >([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const [phase, setPhase] = useState<Phase>("question");
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  const handleSendMessage = () => {
+  const [lastQuestion, setLastQuestion] = useState<string>("");
+
+  const handleSendMessage = async () => {
     if (!inputValue.trim() || isSending) return;
     setIsSending(true);
 
     setMessages((prev) => [...prev, { text: inputValue, direction: "right" }]);
+    const userInput = inputValue;
     setInputValue("");
 
-    setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        { text: "AI의 응답입니다.", direction: "left", isBot: true },
-      ]);
+    const loadingMessage: Message = {
+      text: phase === "question" ? "질문을 생성 중..." : "답변을 생성 중...",
+      direction: "left",
+      isBot: true,
+    };
+    setMessages((prev) => [...prev, loadingMessage]);
+
+    try {
+      if (phase === "question") {
+        const generatedQuestion = await generateQuestion(userInput);
+
+        setMessages((prev) => {
+          const updated = prev.slice(0, -1);
+          return [...updated, { text: generatedQuestion, direction: "left", isBot: true }];
+        });
+
+        setLastQuestion(generatedQuestion);
+        setPhase("answer");
+      } else {
+        const generatedAnswer = await generateAnswer(lastQuestion);
+
+        setMessages((prev) => {
+          const updated = prev.slice(0, -1);
+          return [...updated, { text: generatedAnswer, direction: "left", isBot: true }];
+        });
+
+        setPhase("question");
+      }
+    } catch (err) {
+      console.error("에러 발생:", err);
+      setMessages((prev) => {
+        const updated = prev.slice(0, -1);
+        return [
+          ...updated,
+          { text: "⚠️ 에러가 발생했습니다.", direction: "left", isBot: true },
+        ];
+      });
+    } finally {
       setIsSending(false);
-    }, 1000);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -36,8 +81,7 @@ const AiInterview = () => {
 
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop =
-        chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -62,8 +106,9 @@ const AiInterview = () => {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
+          disabled={isSending}
         />
-        <S.InputIconButton onClick={handleSendMessage}>
+        <S.InputIconButton onClick={handleSendMessage} disabled={isSending}>
           <img src={SendIcon} alt="Send Icon" />
         </S.InputIconButton>
       </S.InputContainer>
