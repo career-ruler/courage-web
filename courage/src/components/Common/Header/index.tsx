@@ -6,7 +6,9 @@ import LoginModal from "../Modal/Login/LoginModal";
 import ProfileModal from "../Modal/Profile/ProfileModal";
 
 const HeaderBar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  //로그인 회원가입 별 헤더 로직 다름
+  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
