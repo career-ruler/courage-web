@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import * as S from "./style";
 import ImageUpload from "../../../assets/image/Image.svg";
+import { createPost } from "../../../api/post/post";
 
 const CreatePost = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [uploadedImageFile, setUploadedImageFile] = useState<File | null>(null);
   const [errors, setErrors] = useState({
     title: false,
     content: false,
@@ -22,36 +25,13 @@ const CreatePost = () => {
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (!file) {
-      console.log("선택된 파일이 없습니다.");
-      return;
-    }
+    if (!file) return;
 
-    console.log("선택된 파일:", file);
-
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      console.log("파일 읽기 성공:", reader.result);
-      setUploadedImage(reader.result as string);
-    };
-
-    reader.onerror = (error) => {
-      console.error("파일 읽기 실패:", error);
-    };
-
-    reader.readAsDataURL(file);
-
+    setUploadedImageFile(file);
     event.target.value = "";
   };
 
-  useEffect(() => {
-    if (uploadedImage) {
-      console.log("업로드된 이미지가 상태에 저장되었습니다:", uploadedImage);
-    }
-  }, [uploadedImage]);
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const newErrors = {
       title: title.trim() === "",
       content: content.trim() === "",
@@ -60,21 +40,31 @@ const CreatePost = () => {
 
     setErrors(newErrors);
 
-    if (!newErrors.title && !newErrors.content && !newErrors.tag) {
-      console.log("게시글 제출:", {
+    if (newErrors.title || newErrors.content || newErrors.tag) return;
+
+    try {
+      const response = await createPost({
         title,
-        content,
-        selectedTag,
-        uploadedImage,
+        description: content,
+        picture: uploadedImageFile,
+        category: selectedTag!,
       });
+
+      console.log("게시글 등록 성공:", response);
+      navigate("/post"); // 성공 시 /post로 이동
+    } catch (err) {
+      console.error("게시글 등록 실패:", err);
     }
   };
 
   return (
     <S.CreatePostContainer>
       <S.ImageUploadContainer>
-        {uploadedImage ? (
-          <S.UploadedImage src={uploadedImage} alt="Uploaded" />
+        {uploadedImageFile ? (
+          <S.UploadedImage
+            src={URL.createObjectURL(uploadedImageFile)}
+            alt="Uploaded"
+          />
         ) : (
           <>
             <S.ImageUploadIcon src={ImageUpload} alt="Image Upload" />
@@ -88,6 +78,7 @@ const CreatePost = () => {
           onChange={handleImageUpload}
         />
       </S.ImageUploadContainer>
+
       <S.EnterContainer>
         <S.MediumText>제목</S.MediumText>
         <S.MediumTextField
@@ -97,7 +88,6 @@ const CreatePost = () => {
             setTitle(e.target.value);
             setErrors((prev) => ({ ...prev, title: false }));
           }}
-          multiline={false}
         />
         {errors.title && <S.ErrorText>*제목을 입력해주세요.</S.ErrorText>}
 
@@ -109,7 +99,7 @@ const CreatePost = () => {
             setContent(e.target.value);
             setErrors((prev) => ({ ...prev, content: false }));
           }}
-          multiline={true}
+          multiline
         />
         {errors.content && <S.ErrorText>*내용을 입력해주세요.</S.ErrorText>}
 
