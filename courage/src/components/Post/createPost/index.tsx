@@ -16,7 +16,7 @@ const CreatePost = () => {
     tag: false,
   });
 
-  const tags = ["Server", "Web", "Android", "iOS", "AI"];
+  const tags = ["SERVER", "WEB", "ANDROID", "iOS", "AI"];
 
   const handleTagClick = (tag: string) => {
     setSelectedTag(tag);

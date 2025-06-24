@@ -5,38 +5,55 @@ import ProfileIcon from "../../assets/image/profile.svg";
 import PostForm from "./component/PostForm";
 import PostTestImg from "../../assets/image/banner.png";
 import { fetchUserProfile } from "../../api/profile/profile";
+import { fetchAllPosts } from "../../api/post/post";
+import clickIcon from "../../assets/image/test.png";
+import shareIcon from "../../assets/image/testt.png";
+import { click } from "@testing-library/user-event/dist/click";
+
+interface Post {
+  boardId: number;
+  userId?: string;
+  title: string;
+  picture: string;
+  createdDate: string;
+  category: string;
+}
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [userId, setUserId] = useState("");
-  const [postIds, setPostIds] = useState<number[]>([]);
+  const [userId, setUserId] = useState<string>("");
+  const [allPosts, setAllPosts] = useState<Post[]>([]);
 
   useEffect(() => {
-    const loadProfile = async () => {
+    const loadProfileAndPosts = async () => {
       try {
-        const { userId, products } = await fetchUserProfile();
+        const { userId } = await fetchUserProfile();
         setUserId(userId);
-        setPostIds(products);
+
+        const posts = await fetchAllPosts();
+        const convertedPosts: Post[] = posts.map((p) => ({
+          boardId: p.boardId,
+          userId: p.userId,
+          title: p.title,
+          picture: p.picture,
+          createdDate: p.createdDate,
+          category: p.category,
+        }));
+
+        setAllPosts(convertedPosts);
       } catch (err) {
-        console.error("프로필 불러오기 실패:", err);
+        console.error("프로필 또는 게시글 불러오기 실패:", err);
       }
     };
 
-    loadProfile();
+    loadProfileAndPosts();
   }, []);
 
-  const handlePostClick = (id: number) => {
-    navigate(`/post/${id}`);
+  const handlePostClick = (boardId: number) => {
+    navigate(`/post/${boardId}`);
   };
 
-  // 예시 데이터, 추후 게시글 API로 연동 가능
-  const mockPosts = postIds.map((id) => ({
-    id,
-    title: `게시글 제목 ${id}`,
-    username: userId,
-    image: PostTestImg,
-    date: "2023-01-01", // 서버 응답 확장 시 createdDate도 받아서 사용 가능
-  }));
+  const sortedPosts = [...allPosts].sort((a, b) => b.boardId - a.boardId);
 
   return (
     <S.ProfileContainer>
@@ -47,18 +64,27 @@ const Profile = () => {
           <S.ProfileSmallTitle>{userId}</S.ProfileSmallTitle>
         </S.ColumContainer>
       </S.RowContainer>
+
       <S.HorizontalLine />
+
       <S.TwoColumnContainer>
-        {mockPosts.map((post) => (
-          <div key={post.id} onClick={() => handlePostClick(post.id)}>
-            <PostForm
-              title={post.title}
-              username={post.username}
-              image={post.image}
-              date={post.date}
-            />
-          </div>
-        ))}
+        {sortedPosts.map((post, index) => {
+          const image = index === 0 ? clickIcon : shareIcon;
+
+          return (
+            <div
+              key={post.boardId}
+              onClick={() => handlePostClick(post.boardId)}
+            >
+              <PostForm
+                title={post.title}
+                username={post.userId ?? "leeyoonchae"}
+                image={image}
+                date={new Date(post.createdDate).toLocaleDateString()}
+              />
+            </div>
+          );
+        })}
       </S.TwoColumnContainer>
     </S.ProfileContainer>
   );

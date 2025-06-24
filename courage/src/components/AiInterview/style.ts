@@ -117,3 +117,23 @@ export const ChatContainer = styled.div`
   scrollbar-width: none;
 `;
 
+export const EmptyState = styled.div`
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  font-size: 18px;
+  text-align: center;
+  user-select: none;
+  gap: 10px;
+
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #444;
+    margin: 0;
+  }
+`;

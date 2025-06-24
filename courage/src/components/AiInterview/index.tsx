@@ -3,7 +3,10 @@ import * as S from "./style";
 import SendIcon from "../../assets/image/Send.svg";
 import ChatBubble from "../Home/component/ChatBubble";
 
-import { generateQuestion, generateAnswer } from "../../api/aiInterview/aiInterview";
+import {
+  generateQuestion,
+  generateAnswer,
+} from "../../api/aiInterview/aiInterview";
 
 type Message = {
   text: string;
@@ -21,6 +24,17 @@ const AiInterview = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const [lastQuestion, setLastQuestion] = useState<string>("");
+
+  // 초기 메시지 자동 추가 (마운트 시 한 번만 실행)
+  useEffect(() => {
+    setMessages([
+      {
+        text: "안녕하세요! 당신의 직무를 알려주세요! Server, Web, Android, iOS, AI 가 있습니다.",
+        direction: "left",
+        isBot: true,
+      },
+    ]);
+  }, []);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isSending) return;
@@ -43,7 +57,10 @@ const AiInterview = () => {
 
         setMessages((prev) => {
           const updated = prev.slice(0, -1);
-          return [...updated, { text: generatedQuestion, direction: "left", isBot: true }];
+          return [
+            ...updated,
+            { text: generatedQuestion, direction: "left", isBot: true },
+          ];
         });
 
         setLastQuestion(generatedQuestion);
@@ -53,7 +70,10 @@ const AiInterview = () => {
 
         setMessages((prev) => {
           const updated = prev.slice(0, -1);
-          return [...updated, { text: generatedAnswer, direction: "left", isBot: true }];
+          return [
+            ...updated,
+            { text: generatedAnswer, direction: "left", isBot: true },
+          ];
         });
 
         setPhase("question");
@@ -81,13 +101,24 @@ const AiInterview = () => {
 
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
   return (
     <S.AiInterviewContainer>
       <S.ChatContainer ref={chatContainerRef}>
+        {messages.length === 0 && (
+          <S.EmptyState>
+            <h2>🤖 AI 면접 튜터</h2>
+            <p>
+              여기에 질문을 입력하고 엔터를 눌러 AI와 면접 연습을 시작하세요.
+            </p>
+            <p>편안하게 답변해보세요!</p>
+          </S.EmptyState>
+        )}
+
         {messages.map((message, index) => (
           <div key={index}>
             {message.isBot && <S.AiInterviewTitle>AI bot</S.AiInterviewTitle>}
@@ -100,6 +131,7 @@ const AiInterview = () => {
           </div>
         ))}
       </S.ChatContainer>
+
       <S.InputContainer>
         <S.InputField
           placeholder="채팅을 입력해주세요."

@@ -13,7 +13,7 @@ export async function signupUser(userId: string, password: string) {
     throw new Error(error.message || "회원가입 실패");
   }
 
-  return await res.json(); // { accessToken, refreshToken }
+  return await res.json();
 }
 
 export async function signinUser(
@@ -35,7 +35,7 @@ export async function signinUser(
   const json = await res.json();
   console.log("📥 서버 응답:", json);
 
-  const { accessToken, refreshToken } = json.data; // ✅ 여기서 data 안에서 꺼냄
+  const { accessToken, refreshToken } = json.data;
 
   console.log("✅ 로그인 성공: accessToken:", accessToken);
   console.log("✅ 로그인 성공: refreshToken:", refreshToken);

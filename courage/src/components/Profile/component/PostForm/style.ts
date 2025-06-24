@@ -11,10 +11,12 @@ export const PostFormContainer = styled.div`
 `;
 
 export const PostImg = styled.img`
-  width: 175px;
+  min-width: 175px;
   height: 95px;
   object-fit: cover;
   border-radius: 10px;
+  background-color: gray;
+  display: block;
 `;
 
 export const PostHeader = styled.div`

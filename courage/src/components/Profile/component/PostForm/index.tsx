@@ -4,12 +4,12 @@ import * as S from "./style";
 interface PostFormProps {
   title: string;
   username: string;
-  image: string;
+  image?: string;
   date: string;
-  onClick?: () => void; // 클릭 이벤트 추가
+  onClick?: () => void;
 }
 
-const PostFrom: React.FC<PostFormProps> = ({
+const PostForm: React.FC<PostFormProps> = ({
   title,
   username,
   image,
@@ -18,7 +18,7 @@ const PostFrom: React.FC<PostFormProps> = ({
 }) => {
   return (
     <S.PostFormContainer onClick={onClick}>
-      <S.PostImg src={image} alt="Post" />
+      <S.PostImg src={image} alt={`게시글 이미지 - ${title}`} />
       <S.PostHeader>
         <S.PostTitle>{title}</S.PostTitle>
         <S.PostFooter>
@@ -30,4 +30,4 @@ const PostFrom: React.FC<PostFormProps> = ({
   );
 };
 
-export default PostFrom;
+export default PostForm;

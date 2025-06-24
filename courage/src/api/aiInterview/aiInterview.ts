@@ -1,4 +1,4 @@
-const BASE_URL = "https://6724-2a09-bac5-474b-1482-00-20b-80.ngrok-free.app";
+const BASE_URL = "https://d193-2a09-bac1-3f00-48-00-20b-a4.ngrok-free.app";
 
 export async function generateQuestion(userInput: string): Promise<string> {
   const res = await fetch(`${BASE_URL}/generate_question`, {

@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./style";
 import BannerImage from "../../assets/image/banner.png";
 import musicRobot from "../../assets/image/musicRobot.svg";
-import PostSection from "./PostSection";
 import ChatBubble from "./component/ChatBubble";
 import ChatIcon from "../../assets/image/faq.svg";
+import PostSection from "./PostSection";
+import { fetchAllPosts, PostForms } from "../../api/post/post";
 
 const Home = () => {
-  const dummyPosts = Array.from({ length: 6 }, (_, i) => i);
+  const [posts, setPosts] = useState<PostForms[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadPosts = async () => {
+      try {
+        const data = await fetchAllPosts();
+        setPosts(data);
+      } catch (err: any) {
+        setError(err.message || "게시글을 불러오는데 실패했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPosts();
+  }, []);
 
   return (
     <>
@@ -15,11 +33,23 @@ const Home = () => {
         <S.LeftContainer>
           <S.BannerImage src={BannerImage} alt="Banner" />
           <S.PostListText>최근 포스트 목록</S.PostListText>
-          <S.PostGrid>
-            {dummyPosts.map((_, index) => (
-              <PostSection key={index} />
-            ))}
-          </S.PostGrid>
+
+          {loading && <div>로딩중...</div>}
+          {error && <div style={{ color: "red" }}>{error}</div>}
+
+          {!loading && !error && (
+            <S.PostGrid>
+              {posts.map((post) => (
+                <PostSection
+                  key={post.boardId}
+                  title={post.title}
+                  username={post.userId ?? "알 수 없음"}
+                  image={post.picture}
+                  date={new Date(post.createdDate).toLocaleDateString()}
+                />
+              ))}
+            </S.PostGrid>
+          )}
         </S.LeftContainer>
 
         <S.RightContainer>
