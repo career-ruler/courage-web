@@ -4,19 +4,28 @@ import * as S from "./style";
 import ProfileImage from "assets/image/profile.svg";
 import PlusIcon from "assets/image/plus.svg";
 
-const ProfileModal = () => {
+type ProfileModalProps = {
+  onClose: () => void;
+  onLogout: () => void;
+};
+
+const ProfileModal = ({ onClose, onLogout }: ProfileModalProps) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     console.log("로그아웃 버튼 클릭됨");
+    onLogout(); // 상위에서 로그인 상태 false로 바꾸는 함수
+    onClose(); // 모달 닫기
   };
 
   const handleProfileClick = () => {
     navigate("/profile");
+    onClose();
   };
 
   const handleAddPostClick = () => {
     navigate("/createPost");
+    onClose();
   };
 
   return (

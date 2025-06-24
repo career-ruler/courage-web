@@ -6,8 +6,6 @@ import LoginModal from "../Modal/Login/LoginModal";
 import ProfileModal from "../Modal/Profile/ProfileModal";
 
 const HeaderBar = () => {
-  //로그인 회원가입 별 헤더 로직 다름
-  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
@@ -16,6 +14,16 @@ const HeaderBar = () => {
   const closeModal = () => setIsModalOpen(false);
 
   const toggleProfileModal = () => setIsProfileModalOpen((prev) => !prev);
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+    closeModal();
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setIsProfileModalOpen(false);
+  };
 
   return (
     <>
@@ -35,7 +43,12 @@ const HeaderBar = () => {
                 alt="Profile"
                 onClick={toggleProfileModal}
               />
-              {isProfileModalOpen && <ProfileModal />}
+              {isProfileModalOpen && (
+                <ProfileModal
+                  onClose={() => setIsProfileModalOpen(false)}
+                  onLogout={handleLogout}
+                />
+              )}
             </>
           ) : (
             <S.LoginButton onClick={openModal}>로그인</S.LoginButton>
@@ -43,7 +56,9 @@ const HeaderBar = () => {
         </S.ProfileWrapper>
       </S.HeaderBarContainer>
 
-      {isModalOpen && <LoginModal onClose={closeModal} />}
+      {isModalOpen && (
+        <LoginModal onClose={closeModal} onLoginSuccess={handleLoginSuccess} />
+      )}
     </>
   );
 };
